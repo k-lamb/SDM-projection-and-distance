@@ -12,6 +12,7 @@
  - iNaturalist_coords.csv -> coordinates of all research-grade iNaturalist observations to May 2022.
  - 'pops rear edge.txt' -> coordinates of sequenced populations from the southern monophyletic cluster.
  - '*_2m30s.csv' -> climate and coordinate data for presence and pseudo-absence to run model code without going through dat_prep.R scripts. 
+ - West_seq.txt -> coordinates of sequences populations which effective geographic distances are to be calculated between (between all possible pairs).
 
 
 ## The Pipeline
@@ -21,11 +22,11 @@ DATA PREPARATION - dat_prep.R
 The script takes iNaturalist coordinate data and removes outlier points by determining the number of neighboring iNaturalist observations within X distance. The script then down-samples presence data to one point per lat/long grid cell in (X^2 km size). Then, a minimum concave polygon is generating and used to mask the creation of pseudo-absence points far beyong the range margin. Pseudo-absence data is then generated. An equal number of psudo-absence data as presence data exists are generated. The script accounts for points removed in spatial down-sampling. Finally, WorldClim bioclimatic data is downloaded and extracted for all presence and pseudo-absence data points.
 
 Variables to declare:
- - grid size -> kilometer resolution for down-sampling of presence data
+ - grid size -> kilometer resolution for down-sampling of presence data.
  - cluster size -> presence points can be filtered using the number of neighbors N within X km distance to determine if the point is real or not.
- - buffer distance -> how far to extend the creation of pseudo-absences beyond the current range limit
- - resolution -> WorldClim bioclimate variable resolution (2.5 recommended)
- - nearest neighbor (T/F) -> whether to use cluster size to discriminate probability that a population is real
+ - buffer distance -> how far to extend the creation of pseudo-absences beyond the current range limit.
+ - resolution -> WorldClim bioclimate variable resolution (2.5 recommended).
+ - nearest neighbor (T/F) -> whether to use cluster size to discriminate probability that a population is real.
  - presence/absence replication -> if set to 1, the number of pseudo-absence points created will be equal to the number of presence points. Can scale up for smaller subsections of the range or for finer resolution of where observations are known to exist.
  - sanity plot (T/F) -> whether to plot sanity check maps in the course of running the script.
 
